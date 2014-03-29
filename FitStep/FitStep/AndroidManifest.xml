@@ -7,10 +7,7 @@
     <uses-sdk
         android:minSdkVersion="14"
         android:targetSdkVersion="19" />
-<<<<<<< HEAD
     <uses-permission android:name="android.permission.INTERNET"/>
-=======
->>>>>>> e462d2596c85e62f5e5c7edf00db2f1b2f0ec5f4
 
     <application
         android:allowBackup="true"
@@ -26,13 +23,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-<<<<<<< HEAD
         <activity
             android:name="com.hackduke14.fitstep.SettingsActivity"
             android:label="@string/title_activity_settings" >
         </activity>
-=======
->>>>>>> e462d2596c85e62f5e5c7edf00db2f1b2f0ec5f4
     </application>
 
 </manifest>
