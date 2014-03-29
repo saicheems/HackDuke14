@@ -1,0 +1,7 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+    
+    <SwitchPreference android:key="device_1" android:title="@string/pref_device_1"/>
+    <SwitchPreference android:key="device_2" android:title="@string/pref_device_2"/>
+    <SwitchPreference android:key="device_3" android:title="@string/pref_device_3"/>
+
+</PreferenceScreen>

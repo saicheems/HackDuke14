@@ -1,0 +1,6 @@
+[submodule "FitStep/libs/HoloCircularProgressBar"]
+	path = FitStep/libs/HoloCircularProgressBar
+	url = https://github.com/passsy/android-HoloCircularProgressBar.git
+[submodule "FitStep/FitStep/libs/HoloCircularProgressBar"]
+	path = FitStep/FitStep/libs/HoloCircularProgressBar
+	url = https://github.com/passsy/android-HoloCircularProgressBar.git
