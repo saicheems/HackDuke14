@@ -86,6 +86,8 @@ public class MainActivity extends Activity {
     	/* Allowance in dollars. */
     	float allowance = 50.0f;
     	
+    	long period;
+    	
     	/* If all POST calls are successful, we set this to true. */
     	boolean postSuccess;
     	float progress;
@@ -129,29 +131,37 @@ public class MainActivity extends Activity {
         public void onResume() {
         	super.onResume();
         	
+        	textView.setText("Syncing");
+        	
         	postSuccess = false;
         	
-        	final long period = Long.parseLong(preferences.getString("sync_frequency", "5")) * 1000;
+        	period = Long.parseLong(preferences.getString("sync_frequency", "5")) * 1000;
         	Log.i(this.getClass().getName(), "Period to update is: " + period);
-        	progressBar.postDelayed(new Runnable() {
-        		public void run() {
-        			progressBar.postDelayed(this, period);
-        			if (!postSuccess) new PostRequest().execute(0);
-        			new GetRequest().execute();
-        		}
-        	}, 0);
+        	progressBar.postDelayed(action, 0);
         	
+        }
+        
+        Runnable action = new Runnable() {
+    		public void run() {
+    			progressBar.postDelayed(this, period);
+    			if (!postSuccess) new PostRequest().execute(0);
+    			new GetRequest().execute();
+    		}
+        };
+        
+        public void onPause() {
+        	super.onPause();
+        	progressBar.removeCallbacks(action);
         }
         
     	class GetRequest extends AsyncTask<Integer, Void, String> {
 
     		protected void onPreExecute() {
-    			textView.setText("Syncing");
     		}
     		
     		@Override
     		protected String doInBackground(Integer... params) {
-    			String url = "this url doesn't exist";
+    			String url = "http://lit-hamlet-4028.herokuapp.com/devices/0";
 				try {
 					URL obj = new URL(url);
 	    			HttpURLConnection con = (HttpURLConnection) obj.openConnection();
@@ -187,9 +197,10 @@ public class MainActivity extends Activity {
     		
     		protected void onPostExecute(String result) {
     			if (result != null) {
-    				textView.setText(result);
+    				textView.setText("$" + result);
     				progressBar.setProgress(Float.parseFloat(result) / allowance);
-    			}
+    			} else
+        			textView.setText("Syncing");
     		}
     	}
         

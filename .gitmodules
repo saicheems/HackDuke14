@@ -4,3 +4,6 @@
 [submodule "FitStep/FitStep/libs/HoloCircularProgressBar"]
 	path = FitStep/FitStep/libs/HoloCircularProgressBar
 	url = https://github.com/passsy/android-HoloCircularProgressBar.git
+[submodule "FitStep/Server"]
+	path = FitStep/Server
+	url = https://github.com/Millerj1994/SinatraServer.git
