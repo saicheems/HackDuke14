@@ -1,5 +1,6 @@
 package com.hackduke14.fitstep;
 
+<<<<<<< HEAD
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -32,10 +33,17 @@ import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+=======
+import android.app.Activity;
+import android.app.ActionBar;
+import android.app.Fragment;
+import android.os.Bundle;
+>>>>>>> e462d2596c85e62f5e5c7edf00db2f1b2f0ec5f4
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+<<<<<<< HEAD
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -43,6 +51,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.os.Build;
 import android.preference.PreferenceManager;
+=======
+import android.view.ViewGroup;
+import android.os.Build;
+>>>>>>> e462d2596c85e62f5e5c7edf00db2f1b2f0ec5f4
 
 public class MainActivity extends Activity {
 
@@ -64,7 +76,10 @@ public class MainActivity extends Activity {
         
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+<<<<<<< HEAD
         
+=======
+>>>>>>> e462d2596c85e62f5e5c7edf00db2f1b2f0ec5f4
         return true;
     }
 
@@ -85,6 +100,7 @@ public class MainActivity extends Activity {
      */
     public static class PlaceholderFragment extends Fragment {
 
+<<<<<<< HEAD
     	HoloCircularProgressBar progressBar;
     	TextView textView;
     	
@@ -99,6 +115,8 @@ public class MainActivity extends Activity {
     	
     	SharedPreferences preferences;
     	
+=======
+>>>>>>> e462d2596c85e62f5e5c7edf00db2f1b2f0ec5f4
         public PlaceholderFragment() {
         }
 
@@ -106,6 +124,7 @@ public class MainActivity extends Activity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+<<<<<<< HEAD
             
             preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
             timer = new Timer();
@@ -228,4 +247,10 @@ public class MainActivity extends Activity {
     		}
     	}
     }
+=======
+            return rootView;
+        }
+    }
+
+>>>>>>> e462d2596c85e62f5e5c7edf00db2f1b2f0ec5f4
 }
