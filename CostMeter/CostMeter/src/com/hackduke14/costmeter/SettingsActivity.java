@@ -84,6 +84,7 @@ public class SettingsActivity extends PreferenceActivity {
 		bindPreferenceSummaryToValue(findPreference("device_1_wattage"));
 		bindPreferenceSummaryToValue(findPreference("device_2_wattage"));
 		bindPreferenceSummaryToValue(findPreference("device_3_wattage"));
+		bindPreferenceSummaryToValue(findPreference("square_footage"));
 //		bindPreferenceSummaryToValue(findPreference("notifications_new_message_ringtone"));
 //		bindPreferenceSummaryToValue(findPreference("sync_frequency"));
 	}
@@ -168,7 +169,11 @@ public class SettingsActivity extends PreferenceActivity {
 				}
 
 			} else if (preference instanceof EditTextPreference) {
-				preference.setSummary(stringValue + " watts");
+				if(preference.getKey().equals("square_footage")) {
+					preference.setSummary(stringValue + " sq. ft");
+				} else {
+					preference.setSummary(stringValue + " watts");
+				}
 			} else {
 				// For all other preferences, set the summary to the value's
 				// simple string representation.
