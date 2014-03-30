@@ -103,7 +103,7 @@ public class MainActivity extends Activity {
     	boolean postSuccess;
     	float progress;
     	
-    	boolean shouldNotify = false;
+    	static boolean shouldNotify = false;
     	
     	Timer timer;
     	
