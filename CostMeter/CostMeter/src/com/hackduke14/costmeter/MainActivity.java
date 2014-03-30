@@ -27,12 +27,18 @@ import com.hackduke14.fitstep.R;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.TaskStackBuilder;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -97,18 +103,40 @@ public class MainActivity extends Activity {
     	boolean postSuccess;
     	float progress;
     	
+    	boolean shouldNotify = false;
+    	
     	Timer timer;
     	
     	SharedPreferences preferences;
     	
         public PlaceholderFragment() {
         }
+        
+        void produceNotification() {
+        	NotificationCompat.Builder mBuilder =
+        	        new NotificationCompat.Builder(getActivity())
+        	        .setSmallIcon(R.drawable.ic_launcher)
+        	        .setContentTitle("CostMeter")
+        	        .setContentText("You are near your limit!");
+
+        	// The stack builder object will contain an artificial back stack for the
+        	// started Activity.
+        	// This ensures that navigating backward from the Activity leads out of
+        	// your application to the Home screen.
+        	NotificationManager mNotificationManager =
+        	    (NotificationManager) getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
+        	// mId allows you to update the notification later on.
+        	int id = 0;
+        	
+        	Notification notif = mBuilder.build();
+        	notif.defaults |= Notification.DEFAULT_SOUND;
+        	mNotificationManager.notify(id, notif);
+        }
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-            
             preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
             timer = new Timer();
             
@@ -204,6 +232,12 @@ public class MainActivity extends Activity {
     			if (result != null) {
     				textView.setText(String.format("$%.2f", Float.parseFloat(result)));
     				progressBar.setProgress(Float.parseFloat(result) / allowance);
+    				if (!shouldNotify && progressBar.getProgress() < 0.25f) {
+    					shouldNotify = true;
+    					produceNotification();
+    				}
+    				if (progressBar.getProgress() > 0.25f)
+    					shouldNotify = false;
     			} else
         			textView.setText("Syncing");
     		}
