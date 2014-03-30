@@ -1,0 +1,6 @@
+[submodule "CostMeter/Server"]
+	path = CostMeter/Server
+	url = https://github.com/Millerj1994/SinatraServer.git
+[submodule "CostMeter/CostMeter/libs/HoloCircularProgressBar"]
+	path = CostMeter/CostMeter/libs/HoloCircularProgressBar
+	url = https://github.com/passsy/android-HoloCircularProgressBar.git
