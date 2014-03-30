@@ -1,4 +1,4 @@
-package com.hackduke14.fitstep;
+package com.hackduke14.costmeter;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -17,8 +17,13 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import com.hackduke14.fitstep.R;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -84,7 +89,7 @@ public class MainActivity extends Activity {
     	TextView textView;
     	
     	/* Allowance in dollars. */
-    	float allowance = 50.0f;
+    	float allowance = 2.5f;
     	
     	long period;
     	
@@ -197,7 +202,7 @@ public class MainActivity extends Activity {
     		
     		protected void onPostExecute(String result) {
     			if (result != null) {
-    				textView.setText("$" + result);
+    				textView.setText(String.format("$%.2f", Float.parseFloat(result)));
     				progressBar.setProgress(Float.parseFloat(result) / allowance);
     			} else
         			textView.setText("Syncing");
@@ -211,11 +216,29 @@ public class MainActivity extends Activity {
     			Log.i(this.getClass().getName(), "Attempting to post...");
     		    try {
         			HttpClient httpclient = new DefaultHttpClient();
-        		    HttpPost httppost = new HttpPost("http://www.google.com");
+        		    HttpPost httppost = new HttpPost("http://lit-hamlet-4028.herokuapp.com/update");
     		        // Add your data
-    		        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-    		        nameValuePairs.add(new BasicNameValuePair("device", Integer.toString(params[0])));
-    		        httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+        		    
+        		    boolean device1 = preferences.getBoolean("device_1", false);
+        		    boolean device2 = preferences.getBoolean("device_2", false);
+        		    boolean device3 = preferences.getBoolean("device_3", false);
+        		    float wattage1 = Float.parseFloat(preferences.getString("device_1_wattage", "0"));
+        		    float wattage2 = Float.parseFloat(preferences.getString("device_2_wattage", "0"));
+        		    float wattage3 = Float.parseFloat(preferences.getString("device_3_wattage", "0"));
+        		    
+        		    JSONObject holder = new JSONObject();
+					holder.put("first_device", device1? 1 : 0);
+					holder.put("second_device", device2? 1 : 0);
+	        		holder.put("third_device", device3? 1 : 0);
+	        		holder.put("wattage_first_device", wattage1);
+	        		holder.put("wattage_second_device", wattage2);
+	        		holder.put("wattage_third_device", wattage3);
+
+	        		Log.i(this.getClass().getName(), holder.toString());
+
+        		    StringEntity se = new StringEntity(holder.toString());
+	        		
+    		        httppost.setEntity(se);
 
     		        // Execute HTTP Post Request
     		        HttpResponse response = httpclient.execute(httppost);
@@ -225,7 +248,10 @@ public class MainActivity extends Activity {
     		        // TODO Auto-generated catch block
     		    } catch (IOException e) {
     		        // TODO Auto-generated catch block
-    		    }
+    		    } catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
     			return false;
     		}
     		

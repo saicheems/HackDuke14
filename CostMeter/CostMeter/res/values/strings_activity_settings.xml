@@ -13,6 +13,7 @@
     <string name="pref_title_sync_frequency">Sync frequency</string>
 
     <string-array name="pref_sync_frequency_titles">
+        <item>1 second</item>
         <item>5 seconds</item>
         <item>10 seconds</item>
         <item>30 seconds</item>
@@ -20,6 +21,7 @@
         <item>5 minutes</item>
     </string-array>
     <string-array name="pref_sync_frequency_values">
+        <item>1</item>
         <item>5</item>
         <item>10</item>
         <item>30</item>
@@ -38,5 +40,9 @@
     <string name="pref_device_1">Device 1</string>
     <string name="pref_device_2">Device 2</string>
     <string name="pref_device_3">Device 3</string>
+    <string name="prev_device_1_wattage">Device 1 wattage</string>
+    <string name="prev_device_2_wattage">Device 2 wattage</string>
+    <string name="prev_device_3_wattage">Device 3 wattage</string>
+    <string name="prev_device_dialog_title">Enter wattage</string>
 
 </resources>

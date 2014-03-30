@@ -1,0 +1,10 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+    
+    <SwitchPreference android:key="device_1" android:title="@string/pref_device_1"/>
+    <SwitchPreference android:key="device_2" android:title="@string/pref_device_2"/>
+    <SwitchPreference android:key="device_3" android:title="@string/pref_device_3"/>
+    <EditTextPreference android:title="@string/prev_device_1_wattage" android:numeric="decimal" android:defaultValue="0.00" android:key="device_1_wattage" android:dialogTitle="@string/prev_device_dialog_title" />
+    <EditTextPreference android:title="@string/prev_device_2_wattage" android:numeric="decimal" android:defaultValue="0.00" android:key="device_2_wattage" android:dialogTitle="@string/prev_device_dialog_title" />
+    <EditTextPreference android:title="@string/prev_device_3_wattage" android:numeric="decimal" android:defaultValue="0.00" android:key="device_3_wattage" android:dialogTitle="@string/prev_device_dialog_title" />
+
+</PreferenceScreen>
